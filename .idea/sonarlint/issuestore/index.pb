@@ -62,11 +62,7 @@ h
 r
 Bsrc/main/java/domain/chofer/event/TelefonoDeChoferActualizado.java,a\c\acde8195b8dfd49d4b586d58285946c3fb500af8
 s
-Csrc/main/java/domain/chofer/event/DireccionDeChoferActualizada.java,f\c\fc38c9e5f51f2b40b0a42f27a865cbd5a2014a15
-s
 Csrc/main/java/domain/administrador/entity/HistorialDeContratos.java,6\f\6f619b3afb1fd6d02cac9900724668509b212af4
-i
-9src/main/java/domain/chofer/entity/HistorialDeViajes.java,5\9\59127d927122c4abad7c6acfbe666c0b18674581
 `
 0src/main/java/domain/camión/entity/Trailer.java,e\1\e14305806d1c679249b1132eed1b2f1923a84b65
 V
@@ -81,8 +77,6 @@ g
 7src/main/java/domain/camión/event/TrailerAgregado.java,c\7\c733a1c9fd4b4be916bf41fcc7e8df7447599c1c
 u
 Esrc/main/java/domain/logistico/event/ViajeCamionAsignadoAlChofer.java,2\a\2a31268ed7e6a9cfa21b3760977efbe4df95a1fc
-l
-<src/main/java/domain/chofer/aggregate/ChoferEventChange.java,5\6\56d75251bf8227dc11dc9146de65f0750f51393d
 m
 =src/main/java/domain/camión/aggregate/CamionEventChange.java,5\d\5d84c8e83313caa7fe686c49b1425bac69bbe1dd
 {
