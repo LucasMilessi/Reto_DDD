@@ -4,11 +4,11 @@ import co.com.sofka.domain.generic.Command;
 import domain.chofer.value.ChoferId;
 import domain.generic.Telefono;
 
-public class cambiarTelefonoDeChofer extends Command {
+public class CambiarTelefonoDeChofer extends Command {
     private final ChoferId choferId;
     private final Telefono telefono;
 
-    public cambiarTelefonoDeChofer(ChoferId choferId, Telefono telefono) {
+    public CambiarTelefonoDeChofer(ChoferId choferId, Telefono telefono) {
         this.choferId = choferId;
         this.telefono = telefono;
     }

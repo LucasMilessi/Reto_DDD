@@ -26,7 +26,7 @@ public class Chofer extends AggregateEvent<ChoferId> {
 
     public Chofer(ChoferId choferId, Nombre nombre, Edad edad, EstadoDeViaje disponible, Direccion direccion, Telefono telefono, Salario sueldo) {
         super(choferId);
-        appendChange(new ChoferCreado(nombre, disponible, direccion, telefono, sueldo)).apply();
+        appendChange(new ChoferCreado(nombre, edad, disponible, direccion, telefono, sueldo)).apply();
     }
 
     private Chofer(ChoferId choferId){

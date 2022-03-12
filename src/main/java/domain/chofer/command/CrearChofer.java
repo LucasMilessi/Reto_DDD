@@ -1,11 +1,12 @@
-package domain.chofer.event;
+package domain.chofer.command;
 
-import co.com.sofka.domain.generic.DomainEvent;
+import co.com.sofka.domain.generic.Command;
 import domain.chofer.value.ChoferId;
 import domain.chofer.value.Salario;
 import domain.generic.*;
 
-public class ChoferCreado extends DomainEvent {
+public class CrearChofer extends Command {
+    private final ChoferId choferId;
     private final Nombre nombre;
     private final Edad edad;
     private final EstadoDeViaje disponible;
@@ -13,14 +14,18 @@ public class ChoferCreado extends DomainEvent {
     private final Telefono telefono;
     private final Salario sueldo;
 
-    public ChoferCreado(Nombre nombre, Edad edad, EstadoDeViaje disponible, Direccion direccion, Telefono telefono, Salario sueldo) {
-        super("chofer.chofercreado");
+    public CrearChofer(ChoferId choferId, Edad edad, Nombre nombre, EstadoDeViaje disponible, Direccion direccion, Telefono telefono, Salario sueldo) {
+        this.choferId = choferId;
         this.nombre = nombre;
         this.edad = edad;
-        this.disponible = new EstadoDeViaje(EstadoDeViaje.Fase.LIBRE);
+        this.disponible = disponible;
         this.direccion = direccion;
         this.telefono = telefono;
         this.sueldo = sueldo;
+    }
+
+    public ChoferId getChoferId() {
+        return choferId;
     }
 
     public Nombre getNombre() {

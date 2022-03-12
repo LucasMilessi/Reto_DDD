@@ -7,6 +7,7 @@ import domain.camión.event.TrailerAgregado;
 import domain.camión.value.*;
 import domain.chofer.value.ChoferId;
 import domain.generic.EstadoDeViaje;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
@@ -44,7 +45,7 @@ public class Camion extends AggregateEvent<CamionId> {
         return estadoDeViaje.value().equals(EstadoDeViaje.Fase.EN_VIAJE);
     }
 
-    public CantidadDeCombustible cantidadDeCombustible(Camion camion){
+    public CantidadDeCombustible cantidadDeCombustible(@NotNull Camion camion){
         return camion.cantidadDeCombustible();
     }
 
