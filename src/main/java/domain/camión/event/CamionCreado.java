@@ -11,7 +11,7 @@ public class CamionCreado extends DomainEvent {
     private final CantidadDeCombustible cantidadDeCombustible;
     private final EstadoDeCamion estadoDeCamion;
 
-    public CamionCreado(CamionId camionId, CantidadDeKM cantidadDeKM, Marca marca, EstadoDeViaje estadoDeViaje, CantidadDeCombustible cantidadDeCombustible, EstadoDeCamion estadoDeCamion) {
+    public CamionCreado(CantidadDeKM cantidadDeKM, Marca marca, EstadoDeViaje estadoDeViaje, CantidadDeCombustible cantidadDeCombustible, EstadoDeCamion estadoDeCamion) {
         super("camion.camioncreado");
         this.cantidadDeKM = cantidadDeKM;
         this.marca = marca;

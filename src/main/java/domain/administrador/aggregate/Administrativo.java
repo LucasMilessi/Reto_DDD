@@ -2,13 +2,12 @@ package domain.administrador.aggregate;
 
 import co.com.sofka.domain.generic.AggregateEvent;
 import co.com.sofka.domain.generic.DomainEvent;
-import domain.administrador.AdministrativoEventChange;
 import domain.administrador.entity.HistorialDeContratos;
 import domain.administrador.event.AdministrativoCreado;
 import domain.administrador.event.ChoferContratado;
-import domain.administrador.event.DireccionActualizada;
+import domain.administrador.event.DireccionDeAdministrativoActualizada;
+import domain.administrador.event.TelefonoDeAdministrativoActualizado;
 import domain.administrador.value.AdministrativoId;
-import domain.chofer.ChoferEventChange;
 import domain.chofer.value.ChoferId;
 import domain.generic.Direccion;
 import domain.generic.Edad;
@@ -16,6 +15,7 @@ import domain.generic.Nombre;
 import domain.generic.Telefono;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 public class Administrativo extends AggregateEvent<AdministrativoId> {
@@ -26,9 +26,9 @@ public class Administrativo extends AggregateEvent<AdministrativoId> {
     protected ChoferId choferId;
     protected Set<HistorialDeContratos> historialDeContratos;
 
-    public Administrativo(AdministrativoId administrativoId, Nombre nombre, Edad edad, Direccion direccion, Telefono telefono) {
+    public Administrativo(AdministrativoId administrativoId, Nombre nombre, Edad edad, Direccion direccion, Telefono telefono, Set<HistorialDeContratos> historialDeContratos) {
         super(administrativoId);
-        appendChange(new AdministrativoCreado(administrativoId, nombre, edad, direccion,telefono)).apply();
+        appendChange(new AdministrativoCreado(nombre, edad, direccion,telefono, historialDeContratos)).apply();
     }
 
     private Administrativo(AdministrativoId administrativoId){
@@ -47,12 +47,20 @@ public class Administrativo extends AggregateEvent<AdministrativoId> {
         appendChange(new ChoferContratado(choferId, historialDeContratos)).apply();
     }
 
-    public void cambiarDireccion(AdministrativoId administrativoId, Direccion direccion){
-        appendChange(new DireccionActualizada(administrativoId, direccion)).apply();
+    public void cambiarDireccionDeAdministrativo(Direccion direccion){
+        appendChange(new DireccionDeAdministrativoActualizada(direccion)).apply();
     }
 
-    /*public Set<HistorialDeContratos> obtenerContratoDeChoferes(ChoferId choferId, HistorialDeContratos historialDeContratos){
-    }*/
+    public void cambiarTelefonoDeAdministrativo(Telefono telefono){
+        appendChange(new TelefonoDeAdministrativoActualizado(telefono)).apply();
+    }
+
+    public Optional<HistorialDeContratos> obtenerContratoDeChoferId(ChoferId choferId){
+        return historialDeContratos
+                .stream()
+                .filter(historialDeContratos1 -> historialDeContratos1.identity().equals(choferId))
+                .findFirst();
+    }
 
     public Nombre nombre() {
         return nombre;
@@ -68,5 +76,13 @@ public class Administrativo extends AggregateEvent<AdministrativoId> {
 
     public Telefono telefono() {
         return telefono;
+    }
+
+    public ChoferId choferId() {
+        return choferId;
+    }
+
+    public Set<HistorialDeContratos> HistorialDeContratos() {
+        return historialDeContratos;
     }
 }

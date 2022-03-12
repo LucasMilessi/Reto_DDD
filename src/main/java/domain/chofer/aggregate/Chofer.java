@@ -2,16 +2,17 @@ package domain.chofer.aggregate;
 
 import co.com.sofka.domain.generic.AggregateEvent;
 import co.com.sofka.domain.generic.DomainEvent;
-import co.com.sofka.domain.generic.EventChange;
-import domain.chofer.ChoferEventChange;
 import domain.chofer.event.ChoferCreado;
 import domain.chofer.event.DireccionDeChoferActualizada;
+import domain.chofer.event.TelefonoDeChoferActualizado;
 import domain.chofer.value.ChoferId;
 import domain.chofer.entity.HistorialDeViajes;
+import domain.chofer.value.HistorialDeViajesId;
 import domain.chofer.value.Salario;
 import domain.generic.*;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 public class Chofer extends AggregateEvent<ChoferId> {
@@ -25,7 +26,7 @@ public class Chofer extends AggregateEvent<ChoferId> {
 
     public Chofer(ChoferId choferId, Nombre nombre, Edad edad, EstadoDeViaje disponible, Direccion direccion, Telefono telefono, Salario sueldo) {
         super(choferId);
-        appendChange(new ChoferCreado(choferId, nombre, disponible, direccion, telefono, sueldo)).apply();
+        appendChange(new ChoferCreado(nombre, disponible, direccion, telefono, sueldo)).apply();
     }
 
     private Chofer(ChoferId choferId){
@@ -40,8 +41,23 @@ public class Chofer extends AggregateEvent<ChoferId> {
         return chofer;
     }
 
-    public void cambiarDireccion(ChoferId choferId, Direccion direccion){
-        appendChange(new DireccionDeChoferActualizada(choferId, direccion)).apply();
+    public void cambiarDireccionDeChofer(Direccion direccion){
+        appendChange(new DireccionDeChoferActualizada(direccion)).apply();
+    }
+
+    public void cambiarTelefonoDeChofer(Telefono telefono){
+        appendChange(new TelefonoDeChoferActualizado(telefono)).apply();
+    }
+
+    public Optional<HistorialDeViajes> obtenerHistorialDeViajeId(HistorialDeViajesId historialDeViajesId){
+        return viajesRealizados
+                .stream()
+                .filter(viajesRealizados1 -> viajesRealizados1.identity().equals(historialDeViajesId))
+                .findFirst();
+    }
+
+    public boolean viajeAsignado(){
+        return disponible.value().equals(EstadoDeViaje.Fase.EN_VIAJE);
     }
 
     public Nombre nombre() {

@@ -6,25 +6,19 @@ import domain.chofer.value.Salario;
 import domain.generic.*;
 
 public class ChoferCreado extends DomainEvent {
-    private final ChoferId choferId;
     private final Nombre nombre;
     private final EstadoDeViaje disponible;
     private final Direccion direccion;
     private final Telefono telefono;
     private final Salario sueldo;
 
-    public ChoferCreado(ChoferId choferId, Nombre nombre, EstadoDeViaje disponible, Direccion direccion, Telefono telefono, Salario sueldo) {
+    public ChoferCreado(Nombre nombre, EstadoDeViaje disponible, Direccion direccion, Telefono telefono, Salario sueldo) {
         super("chofer.chofercreado");
-        this.choferId = choferId;
         this.nombre = nombre;
         this.disponible = new EstadoDeViaje(EstadoDeViaje.Fase.LIBRE);
         this.direccion = direccion;
         this.telefono = telefono;
         this.sueldo = sueldo;
-    }
-
-    public ChoferId getChoferId() {
-        return choferId;
     }
 
     public Nombre getNombre() {

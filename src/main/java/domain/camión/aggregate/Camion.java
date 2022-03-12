@@ -2,18 +2,11 @@ package domain.camión.aggregate;
 
 import co.com.sofka.domain.generic.AggregateEvent;
 import co.com.sofka.domain.generic.DomainEvent;
-import domain.camión.CamionEventChange;
 import domain.camión.event.CamionCreado;
 import domain.camión.event.TrailerAgregado;
-import domain.camión.value.TrailerId;
-import domain.camión.value.CamionId;
-import domain.camión.value.CantidadDeCombustible;
-import domain.chofer.ChoferEventChange;
+import domain.camión.value.*;
 import domain.chofer.value.ChoferId;
-import domain.camión.value.CantidadDeKM;
-import domain.camión.value.EstadoDeCamion;
 import domain.generic.EstadoDeViaje;
-import domain.camión.value.Marca;
 
 import java.util.List;
 
@@ -28,7 +21,7 @@ public class Camion extends AggregateEvent<CamionId> {
 
     public Camion(CamionId camionId, CantidadDeKM cantidadDeKM, Marca marca, EstadoDeViaje estadoDeViaje, CantidadDeCombustible cantidadDeCombustible, EstadoDeCamion estadoDeCamion) {
         super(camionId);
-        appendChange(new CamionCreado(camionId, cantidadDeKM, marca, estadoDeViaje, cantidadDeCombustible, estadoDeCamion)).apply();
+        appendChange(new CamionCreado(cantidadDeKM, marca, estadoDeViaje, cantidadDeCombustible, estadoDeCamion)).apply();
     }
 
     private Camion(CamionId camionId){
@@ -43,12 +36,32 @@ public class Camion extends AggregateEvent<CamionId> {
         return camion;
     }
 
-    public void agregarTrailer(CamionId camionId, TrailerId trailerId){
-        appendChange(new TrailerAgregado(camionId, trailerId)).apply();
+    public void agregarTrailer(TrailerId trailerId){
+        appendChange(new TrailerAgregado(trailerId)).apply();
     }
 
-    /*public List<CamionId> camionesLibres(Camion camion){
-    }*/
+    public boolean camionAsignado(){
+        return estadoDeViaje.value().equals(EstadoDeViaje.Fase.EN_VIAJE);
+    }
+
+    public CantidadDeCombustible cantidadDeCombustible(Camion camion){
+        return camion.cantidadDeCombustible();
+    }
+
+    public CantidadDeKM cantidadDeKM(Camion camion){
+        return camion.cantidadDeKM;
+    }
+
+    public EstadoDeViaje.Fase obtenerEstadoViajeDelCamion(Camion camion){
+        if(camion.estadoDeCamion.value().equals(EstadoDeViaje.Fase.LIBRE)){
+            return EstadoDeViaje.Fase.LIBRE;
+        }
+        return EstadoDeViaje.Fase.EN_VIAJE;
+    }
+
+    public EstadoDeCamion obtenerEstadoDelCamion(Camion camion){
+        return camion.estadoDeCamion;
+    }
 
     public CantidadDeKM cantidadDeKM() {
         return cantidadDeKM;

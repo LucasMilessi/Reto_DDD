@@ -6,8 +6,8 @@ import domain.camión.value.CamionId;
 import domain.chofer.value.ChoferId;
 import domain.generic.Direccion;
 import domain.generic.Edad;
+import domain.generic.EstadoDeViaje;
 import domain.generic.Nombre;
-import domain.logistico.LogisticoEventChange;
 import domain.logistico.entity.Viaje;
 import domain.logistico.event.LogisticoCreado;
 import domain.logistico.event.ViajeCamionAsignadoAlChofer;
@@ -23,11 +23,12 @@ public class Logistico extends AggregateEvent<LogisticoId> {
     protected Direccion direccion;
     protected ChoferId choferId;
     protected CamionId camionId;
+    protected ViajeId viajeId;
     protected Set<Viaje> viaje;
 
     public Logistico(LogisticoId logisticoId, Nombre nombre, Edad edad, Direccion direccion) {
         super(logisticoId);
-        appendChange(new LogisticoCreado(logisticoId, nombre, edad, direccion)).apply();
+        appendChange(new LogisticoCreado(nombre, edad, direccion)).apply();
     }
 
     private Logistico(LogisticoId logisticoId){
@@ -46,9 +47,11 @@ public class Logistico extends AggregateEvent<LogisticoId> {
         appendChange(new ViajeCamionAsignadoAlChofer(viajeId, choferId, camionId)).apply();
     }
 
-    /*public List<ViajeId> viajesDisponibles(){
-        return viaje.
-    }*/
+    public List<ViajeId> viajesDisponibles(){
+        return (List<ViajeId>) viaje
+                .stream()
+                .filter(viaje1 -> viaje1.estadoDeViaje().equals(EstadoDeViaje.Fase.LIBRE));
+    }
 
     public Nombre nombre() {
         return nombre;
@@ -70,7 +73,7 @@ public class Logistico extends AggregateEvent<LogisticoId> {
         return camionId;
     }
 
-    public Set<Viaje> viaje() {
-        return viaje;
+    public ViajeId viajeId() {
+        return viajeId;
     }
 }
