@@ -14,7 +14,7 @@ public class CrearChofer extends Command {
     private final Telefono telefono;
     private final Salario sueldo;
 
-    public CrearChofer(ChoferId choferId, Edad edad, Nombre nombre, EstadoDeViaje disponible, Direccion direccion, Telefono telefono, Salario sueldo) {
+    public CrearChofer(ChoferId choferId, Nombre nombre, Edad edad, EstadoDeViaje disponible, Direccion direccion, Telefono telefono, Salario sueldo) {
         this.choferId = choferId;
         this.nombre = nombre;
         this.edad = edad;

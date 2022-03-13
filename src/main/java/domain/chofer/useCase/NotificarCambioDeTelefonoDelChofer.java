@@ -22,11 +22,11 @@ public class NotificarCambioDeTelefonoDelChofer extends UseCase<TriggeredEvent<T
         var chofer = Chofer.from(ChoferId.of(event.aggregateRootId()), events);
         var esOK = service.enviarMensajeAlChofer(
                 chofer.identity(),
-                String.format("Se cambio el telefono s%, a el nuevo telefono s%"));
+                String.format("Se cambio el telefono del chofer"));
 
         if(esOK){
             emit().onResponse(new ResponseEvents(List.of()));
         }
-        throw new BusinessException(event.aggregateRootId(), "E mensaje no pudo ser enviado");
+        throw new BusinessException(event.aggregateRootId(), "El mensaje no pudo ser enviado");
     }
 }

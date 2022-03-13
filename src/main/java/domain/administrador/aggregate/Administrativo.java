@@ -26,9 +26,9 @@ public class Administrativo extends AggregateEvent<AdministrativoId> {
     protected ChoferId choferId;
     protected Set<HistorialDeContratos> historialDeContratos;
 
-    public Administrativo(AdministrativoId administrativoId, Nombre nombre, Edad edad, Direccion direccion, Telefono telefono, Set<HistorialDeContratos> historialDeContratos) {
+    public Administrativo(AdministrativoId administrativoId, Nombre nombre, Edad edad, Direccion direccion, Telefono telefono) {
         super(administrativoId);
-        appendChange(new AdministrativoCreado(nombre, edad, direccion,telefono, historialDeContratos)).apply();
+        appendChange(new AdministrativoCreado(nombre, edad, direccion,telefono)).apply();
     }
 
     private Administrativo(AdministrativoId administrativoId){
@@ -43,8 +43,8 @@ public class Administrativo extends AggregateEvent<AdministrativoId> {
         return administrativo;
     }
 
-    public void contratarChofer(ChoferId choferId, HistorialDeContratos historialDeContratos){
-        appendChange(new ChoferContratado(choferId, historialDeContratos)).apply();
+    public void contratarChofer(ChoferId choferId){
+        appendChange(new ChoferContratado(choferId)).apply();
     }
 
     public void cambiarDireccionDeAdministrativo(Direccion direccion){

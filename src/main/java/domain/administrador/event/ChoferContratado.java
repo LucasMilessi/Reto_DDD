@@ -10,18 +10,14 @@ import java.util.Set;
 
 public class ChoferContratado extends DomainEvent {
     private final ChoferId choferId;
-    private final HistorialDeContratos historialDeContratos;
-    public ChoferContratado(ChoferId choferId, HistorialDeContratos historialDeContratos) {
+
+    public ChoferContratado(ChoferId choferId) {
         super("administrador.chofercontratado");
         this.choferId = choferId;
-        this.historialDeContratos = historialDeContratos;
     }
 
     public ChoferId getChoferId() {
         return choferId;
     }
 
-    public HistorialDeContratos getHistorialDeContratos() {
-        return historialDeContratos;
-    }
 }

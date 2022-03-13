@@ -2,21 +2,21 @@ package domain.generic;
 
 import co.com.sofka.domain.generic.ValueObject;
 
-public class Telefono implements ValueObject<Integer> {
-    private final Integer telefono;
+public class Telefono implements ValueObject<Long> {
+    private final Long telefono;
 
-    public Telefono(int telefono) {
+    public Telefono(Long telefono) {
         this.telefono = telefono;
-        if(this.telefono < 9 && this.telefono > 9)
-            throw new IllegalArgumentException("El telefono debe de tener 9 digitos.");
+        if(this.telefono < 12 && this.telefono > 12)
+            throw new IllegalArgumentException("El telefono debe de tener 7 digitos.");
     }
 
-    public Integer getTelefono() {
+    public Long getTelefono() {
         return telefono;
     }
 
     @Override
-    public Integer value() {
+    public Long value() {
         return telefono;
     }
 }

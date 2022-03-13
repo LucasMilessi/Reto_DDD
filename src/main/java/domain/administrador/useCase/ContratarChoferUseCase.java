@@ -13,11 +13,8 @@ public class ContratarChoferUseCase extends UseCase<RequestCommand<ContratarChof
         var command = input.getCommand();
         var administrativo = Administrativo.from(command.getAdministrativoId(), retrieveEvents());
         //Regla de negocio
-        if(administrativo.HistorialDeContratos().size() > 20)
-            throw new BusinessException(command.getAdministrativoId().value(),
-                    "Por el momento no se puede contratar mas de 20 choferes");
         try {
-            administrativo.contratarChofer(command.getChoferId(), command.getHistorialDeContratos());
+            administrativo.contratarChofer(command.getChoferId());
         }catch (IllegalArgumentException e){
             throw new BusinessException(command.getAdministrativoId().value(), e.getMessage());
         }

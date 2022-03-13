@@ -16,15 +16,13 @@ public class CrearAdministrativo extends Command {
     private final Edad edad;
     private final Direccion direccion;
     private final Telefono telefono;
-    private final Set<HistorialDeContratos> historialDeContratos;
 
-    public CrearAdministrativo(AdministrativoId administrativoId, Nombre nombre, Edad edad, Direccion direccion, Telefono telefono, Set<HistorialDeContratos> historialDeContratos) {
+    public CrearAdministrativo(AdministrativoId administrativoId, Nombre nombre, Edad edad, Direccion direccion, Telefono telefono) {
         this.administrativoId = administrativoId;
         this.nombre = nombre;
         this.edad = edad;
         this.direccion = direccion;
         this.telefono = telefono;
-        this.historialDeContratos = historialDeContratos;
     }
 
     public AdministrativoId getAdministrativoId() {
@@ -47,7 +45,4 @@ public class CrearAdministrativo extends Command {
         return telefono;
     }
 
-    public Set<HistorialDeContratos> getHistorialDeContratos() {
-        return historialDeContratos;
-    }
 }

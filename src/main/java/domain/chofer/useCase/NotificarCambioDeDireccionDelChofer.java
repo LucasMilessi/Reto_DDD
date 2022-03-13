@@ -17,11 +17,12 @@ public class NotificarCambioDeDireccionDelChofer extends UseCase<TriggeredEvent<
         var event = input.getDomainEvent();
         var service = getService(SMSChoferService.class).orElseThrow();
 
-        var events = repository().getEventsBy("chofer", event.aggregateRootId());
+        var events = repository().getEventsBy("chofer",event.aggregateRootId());
         var chofer = Chofer.from(ChoferId.of(event.aggregateRootId()), events);
+
         var esOK = service.enviarMensajeAlChofer(
                 chofer.identity(),
-                String.format("Se cambio la direccion del chofer %s, a la dieccion %s"));
+                String.format("Se cambio la direccion del chofer"));
 
         if(esOK){
             emit().onResponse(new ResponseEvents(List.of()));

@@ -16,15 +16,13 @@ public class AdministrativoCreado extends DomainEvent {
     private final Edad edad;
     private final Direccion direccion;
     private final Telefono telefono;
-    private final Set<HistorialDeContratos> historialDeContratos;
 
-    public AdministrativoCreado(Nombre nombre, Edad edad, Direccion direccion, Telefono telefono, Set<HistorialDeContratos> historialDeContratos) {
+    public AdministrativoCreado(Nombre nombre, Edad edad, Direccion direccion, Telefono telefono) {
         super("administrador.administrativocreado");
         this.nombre = nombre;
         this.edad = edad;
         this.direccion = direccion;
         this.telefono = telefono;
-        this.historialDeContratos = new HashSet<>();
     }
 
     public Nombre getNombre() {
@@ -43,7 +41,4 @@ public class AdministrativoCreado extends DomainEvent {
         return telefono;
     }
 
-    public Set<HistorialDeContratos> getHistorialDeContratos() {
-        return historialDeContratos;
-    }
 }

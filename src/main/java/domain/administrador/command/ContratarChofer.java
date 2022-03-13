@@ -8,13 +8,11 @@ import domain.chofer.value.ChoferId;
 public class ContratarChofer extends Command {
     private final AdministrativoId administrativoId;
     private final ChoferId choferId;
-    private final HistorialDeContratos historialDeContratos;
 
 
-    public ContratarChofer(AdministrativoId administrativoId, ChoferId choferId, HistorialDeContratos historialDeContratos) {
+    public ContratarChofer(AdministrativoId administrativoId, ChoferId choferId) {
         this.administrativoId = administrativoId;
         this.choferId = choferId;
-        this.historialDeContratos = historialDeContratos;
     }
 
     public AdministrativoId getAdministrativoId() {
@@ -23,9 +21,5 @@ public class ContratarChofer extends Command {
 
     public ChoferId getChoferId() {
         return choferId;
-    }
-
-    public HistorialDeContratos getHistorialDeContratos() {
-        return historialDeContratos;
     }
 }

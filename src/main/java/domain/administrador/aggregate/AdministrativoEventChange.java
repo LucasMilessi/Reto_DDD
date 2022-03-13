@@ -17,13 +17,10 @@ public class AdministrativoEventChange extends EventChange {
             administrativo.nombre = event.getNombre();
             administrativo.edad = event.getEdad();
             administrativo.direccion = event.getDireccion();
-            administrativo.telefono = event.getTelefono();
-            administrativo.historialDeContratos = new HashSet<>();
         });
 
         apply((ChoferContratado event) -> {
             administrativo.choferId = event.getChoferId();
-            administrativo.historialDeContratos = new HashSet<>(0);
         });
 
         apply((DireccionDeAdministrativoActualizada event) -> {
